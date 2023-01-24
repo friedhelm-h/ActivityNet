@@ -4,21 +4,19 @@ import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed
 
-from utils import get_blocked_videos
 from utils import interpolated_prec_rec
 from utils import segment_iou
 
 
 class ANETdetection(object):
-    GROUND_TRUTH_FIELDS = ['database', 'taxonomy', 'version']
-    PREDICTION_FIELDS = ['results', 'version', 'external_data']
+    GROUND_TRUTH_FIELDS = ['database']
+    PREDICTION_FIELDS = ['results']
 
     def __init__(self, ground_truth_filename=None, prediction_filename=None,
                  ground_truth_fields=GROUND_TRUTH_FIELDS,
                  prediction_fields=PREDICTION_FIELDS,
                  tiou_thresholds=np.linspace(0.5, 0.95, 10),
-                 subset='validation', verbose=False,
-                 check_status=False):
+                 subset='validation', verbose=False):
         if not ground_truth_filename:
             raise IOError('Please input a valid ground truth file.')
         if not prediction_filename:
@@ -29,12 +27,6 @@ class ANETdetection(object):
         self.gt_fields = ground_truth_fields
         self.pred_fields = prediction_fields
         self.ap = None
-        self.check_status = check_status
-        # Retrieve blocked videos from server.
-        if self.check_status:
-            self.blocked_videos = get_blocked_videos()
-        else:
-            self.blocked_videos = list()
         # Import ground truth and predictions.
         self.ground_truth, self.activity_index = self._import_ground_truth(
             ground_truth_filename)
@@ -76,8 +68,6 @@ class ANETdetection(object):
         for videoid, v in data['database'].items():
             if self.subset != v['subset']:
                 continue
-            if videoid in self.blocked_videos:
-                continue
             for ann in v['annotations']:
                 if ann['label'] not in activity_index:
                     activity_index[ann['label']] = cidx
@@ -117,8 +107,6 @@ class ANETdetection(object):
         video_lst, t_start_lst, t_end_lst = [], [], []
         label_lst, score_lst = [], []
         for videoid, v in data['results'].items():
-            if videoid in self.blocked_videos:
-                continue
             for result in v:
                 label = self.activity_index[result['label']]
                 video_lst.append(videoid)

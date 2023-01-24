@@ -9,7 +9,7 @@ def main(ground_truth_filename, prediction_filename,
          verbose=True, check_status=True):
     anet_detection = ANETdetection(ground_truth_filename, prediction_filename,
                                    subset=subset, tiou_thresholds=tiou_thresholds,
-                                   verbose=verbose, check_status=False)
+                                   verbose=verbose)
     anet_detection.evaluate()
 
 
