@@ -1,0 +1,8 @@
+{
+  "version": "VERSION 1.3",
+  "results": {
+    "h1Jpycw4mT8":
+      [{"score": 0.16855287671916064, "segment": [0.0, 51.618], "label": "Skateboarding"}]
+  },
+  "external_data": {"used": false, "details": "Put here the details if external data used"}
+}

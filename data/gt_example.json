@@ -1,0 +1,16 @@
+{
+  "version": "VERSION 1.3",
+  "taxonomy": {},
+  "database": {
+    "22-01-05_17-00-00": [
+      {
+        "label": "ed",
+        "segment": [24.25, 30.6]
+      },
+      {
+      "label": "ed",
+      "segment": [102.05, 123.6]
+      }
+    ]
+  }
+}
