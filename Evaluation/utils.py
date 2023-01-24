@@ -1,15 +1,16 @@
 import json
-import urllib2
+#import urllib2
 
 import numpy as np
 
 API = 'http://ec2-52-25-205-214.us-west-2.compute.amazonaws.com/challenge19/api.py'
 
 def get_blocked_videos(api=API):
-    api_url = '{}?action=get_blocked'.format(api)
-    req = urllib2.Request(api_url)
-    response = urllib2.urlopen(req)
-    return json.loads(response.read())
+    raise NotImplementedError
+#    api_url = '{}?action=get_blocked'.format(api)
+#    req = urllib2.Request(api_url)
+#    response = urllib2.urlopen(req)
+#    return json.loads(response.read())
 
 def interpolated_prec_rec(prec, rec):
     """Interpolated AP - VOCdevkit from VOC 2011.

@@ -3,14 +3,15 @@ import numpy as np
 
 from eval_detection import ANETdetection
 
+
 def main(ground_truth_filename, prediction_filename,
          subset='validation', tiou_thresholds=np.linspace(0.5, 0.95, 10),
          verbose=True, check_status=True):
-
     anet_detection = ANETdetection(ground_truth_filename, prediction_filename,
                                    subset=subset, tiou_thresholds=tiou_thresholds,
-                                   verbose=verbose, check_status=True)
+                                   verbose=verbose, check_status=False)
     anet_detection.evaluate()
+
 
 def parse_input():
     description = ('This script allows you to evaluate the ActivityNet '
@@ -30,6 +31,7 @@ def parse_input():
     p.add_argument('--verbose', type=bool, default=True)
     p.add_argument('--check_status', type=bool, default=True)
     return p.parse_args()
+
 
 if __name__ == '__main__':
     args = parse_input()
